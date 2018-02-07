@@ -120,7 +120,7 @@ function draw() {
 		create_flower();
 	}
 
-	if (h > 9) {
+	if (h > 11) {
 		translate(150, 0);
 		create_flower();
 	}
