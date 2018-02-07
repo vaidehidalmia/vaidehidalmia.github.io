@@ -34,6 +34,10 @@ function draw() {
     var m=minute();
 	var s=second();
 
+	if(h>12) {
+		h = h - 12;
+	}
+
 	background(200);
 	
 	fill(0,191,255);
