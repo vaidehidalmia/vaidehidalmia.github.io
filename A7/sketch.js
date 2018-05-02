@@ -50,6 +50,19 @@ function draw() {
 	textSize(50);
 	text(currentyear,1000,50);
 
+	textSize(15);
+	text('International Bank for Reconstruction and Development (IBRD) - grey',500,420);
+	textSize(12);
+	text('A global development cooperative that primarily provides loans, guarantees, risk management products,',500,435);
+	text(' and expertise on development-related disciplines, as well as coordinates responses to regional and global challenges.',500,450)
+	textSize(15);
+	text('The International Development Association (IDA) - color',500,490);
+	textSize(12);
+	text('The largest multilateral source of concessional financing and the main instrument for pursuing',500,505);
+	text('the World Bank Group\'s goals of ending extreme poverty in the world\'s poorest countries',500,520);
+
+
+	fill(0);
 	textSize(12);
 	fill("#E6194B");
 	text('East Asia and Pacific',20,30);
