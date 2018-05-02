@@ -1,96 +1,118 @@
 var data, thisYear;
-var minTotal, maxTotal = 0;
+var maxTotal = 6491860000;
 
 var yearData = {};
 var currentyear = 1947;
+var colors = {
+  'East Asia and Pacific': "#E6194B", //red
+  'Africa': "#3CB44B", //green
+  'South Asia': "#ffa500", //yellow
+  'Europe and Central Asia': "#0082C8", //blue
+  'Latin America and Caribbean': "#F582B4", //pink
+  'Middle East and North Africa': "#911EB4", //purple
+  'Other': "#46F0F0" //light blue
+}
 
 function preload(){
   data = loadJSON('data.json');
 }
 
 function setup() {
-  createCanvas(1000, 4000);
+  createCanvas(2500, 4000);
   frameRate(30);
   organizeData();
   Minusbutton = createButton('Previous Year');
-  Minusbutton.position(20, 20);
+  Minusbutton.position(20, 50);
   Minusbutton.mousePressed(minusYear);
 
   Addbutton = createButton('Next Year');
-  Addbutton.position(300, 20);
+  Addbutton.position(130, 50);
   Addbutton.mousePressed(addYear);
 }
 
 function minusYear() {
-  console.log("clicked");
-  console.log(currentyear);
   currentyear--;
   if(currentyear < 1947)
-    currentyear = 2018;
+	currentyear = 2018;
   organizeData();
 }
 
 function addYear() {
-  console.log("clicked");
-  console.log(currentyear);
-  // fill(0);
-  // text(currentyear++,19,19);
   currentyear++;
   if(currentyear > 2018)
-    currentyear = 1947;
+	currentyear = 1947;
   organizeData();
 }
 
 function draw() {
-  background(255);
+	background(255);
+	fill(0);
+	textSize(50);
+	text(currentyear,1000,50);
 
-  var margin = 40;
-  translate(20, 60);
+	textSize(12);
+	fill("#E6194B");
+	text('East Asia and Pacific',20,30);
+	fill("#3CB44B");
+	text('Africa',150,30);
+	fill("#ffa500");
+	text('South Asia',200,30);
+	fill("#0082C8");
+	text('Europe and Central Asia',280,30);
+	fill("#F582B4");
+	text('Latin America and Caribbean',430,30);
+	fill("#911EB4");
+	text('Middle East and North Africa',600,30);
+	fill("#46F0F0");
+	text('Other',780,30);
 
-  var i = 0;
-  var rectheight = 15;
-  var lineheight = 20;
-  Object.keys(thisYear).forEach(function(key) {
+	var margin = 40;
+	translate(20, 90);
+	textSize(12);
 
-    region = thisYear[key]['region'];
-    var rectwidth = map(thisYear[key]['total'],minTotal, maxTotal, 0, width-margin*2);
-    // if (mouseX > margin && mouseX < margin+rectwidth && mouseY < margin+i*lineheight && mouseY > margin+i*lineheight+(-1*rectheight)) 
-    //   fill(0);
-    if (region == 'East Asia and Pacific')
-      fill(230, 25, 75,190);
-    else if (region == 'Africa')
-      fill(60, 180, 75,190);
-    else if (region == 'South Asia')
-      fill(255, 225, 25,190);
-    else if (region == 'Europe and Central Asia')
-      fill(0, 130, 200,190);
-    else if (region == 'Latin America and Caribbean')
-      fill(245, 130, 48,190);
-    else if (region == 'Middle East and North Africa')
-      fill(145, 30, 180,190);
-    else 
-      fill(70, 240, 240,190);
+	var i = 0;
+	var rectheight = 10;
+	var lineheight = 20;
+	Object.keys(thisYear).forEach(function(key) {
 
-    
-    rect(0, i*lineheight, rectwidth, -1*rectheight);
-    fill(0);
-    text(thisYear[key]['total'], 0, i*lineheight);
-    i++;
-  });
+		region = thisYear[key]['region'];
+		total = thisYear[key]['total'];
+		ibrd = thisYear[key]['ibrd'];
+		idac = thisYear[key]['idac'];
+		idag = thisYear[key]['idag'];
+		var rectwidth = map(total,0, maxTotal, 0, 2000);
+		var ibrdwidth = ibrd/total * rectwidth;
+		var idacwidth = idac/total * rectwidth;
+		var idagwidth = idag/total * rectwidth;
+		// if (mouseX > margin && mouseX < margin+rectwidth && mouseY < margin+i*lineheight && mouseY > margin+i*lineheight+(-1*rectheight)) 
+		//   fill(0);
+		stroke(colors[region]);
+		strokeWeight(8);
+		fill(colors[region]);
+		rect(0, i*lineheight, rectwidth, -1*rectheight);
+		noStroke();
+		rect(0, i*lineheight, idagwidth, -1*rectheight);
+		rect(idagwidth, i*lineheight, idacwidth, -1*rectheight);
+		fill(230);
+		rect(idagwidth + idacwidth, i*lineheight, ibrdwidth, -1*rectheight);
+		fill(0);
+		text(key, rectwidth + 10, i*lineheight);
+		i++;
+	});
 
 }
 
 function organizeData() {
   thisYear = data[currentyear];
-  Object.keys(thisYear).forEach(function(key) {
-    total = thisYear[key]['total']
-    if(total > maxTotal)
-      maxTotal = total;
-    if (!minTotal) {
-      minTotal = total;
-    } 
-    else if (total < minTotal) {
-      minTotal = total;
-    }
-  });
+ //  Object.keys(thisYear).forEach(function(key) {
+	// total = thisYear[key]['total']
+	// if(total > maxTotal)
+	//   maxTotal = total;
+	// if (!minTotal) {
+	// 	minTotal = total;
+	// } 
+	// else if (total < minTotal) {
+	// 	minTotal = total;
+	// }
+ //  });
 }
