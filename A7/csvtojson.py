@@ -6,6 +6,7 @@ from operator import itemgetter
 reader = csv.DictReader(open('rel_data.csv'))
 
 result = {}
+
 for row in reader:
 	y = row.pop('year')
 	try:
@@ -55,7 +56,7 @@ for row in reader:
 		'ibrd': ibrd,
 		'idac': idac,
 		'idag': idag
-	  }
+	}
 
 # maxTotal = 0
 for y in result:

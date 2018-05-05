@@ -3,6 +3,8 @@ var maxTotal = 6491860000;
 
 var yearData = {};
 var currentyear = 1947;
+var oldValue = 1947;
+
 var colors = {
   'East Asia and Pacific': "#E6194B", //red
   'Africa': "#3CB44B", //green
@@ -13,6 +15,8 @@ var colors = {
   'Other': "#46F0F0" //light blue
 }
 
+var slider;
+
 function preload(){
   data = loadJSON('data.json');
 }
@@ -21,34 +25,34 @@ function setup() {
   createCanvas(2500, 4000);
   frameRate(30);
   organizeData();
-  Minusbutton = createButton('Previous Year');
-  Minusbutton.position(20, 50);
-  Minusbutton.mousePressed(minusYear);
 
-  Addbutton = createButton('Next Year');
-  Addbutton.position(130, 50);
-  Addbutton.mousePressed(addYear);
-}
-
-function minusYear() {
-  currentyear--;
-  if(currentyear < 1947)
-	currentyear = 2018;
-  organizeData();
-}
-
-function addYear() {
-  currentyear++;
-  if(currentyear > 2018)
-	currentyear = 1947;
-  organizeData();
+  slider = createSlider(1947, 2018, 1947, 1);
+  slider.position(20, 70);
+  slider.style('width', '900px');
 }
 
 function draw() {
+	currentyear = slider.value();
+	if (currentyear!= oldValue) {
+		organizeData();
+		oldValue = currentyear;
+	}
+	
 	background(255);
+
+	fill(0);
+	textSize(30);
+	text('World Bank Lendings over Time', 20, 40);
+
+	translate(0,30);
+
 	fill(0);
 	textSize(50);
 	text(currentyear,1000,50);
+
+	textSize(10);
+	text('1947',17,60);
+	text('2018',913,60);
 
 	textSize(15);
 	text('International Bank for Reconstruction and Development (IBRD) - grey',500,420);
@@ -65,19 +69,19 @@ function draw() {
 	fill(0);
 	textSize(12);
 	fill("#E6194B");
-	text('East Asia and Pacific',20,30);
+	text('East Asia and Pacific',20,33);
 	fill("#3CB44B");
-	text('Africa',150,30);
+	text('Africa',150,33);
 	fill("#ffa500");
-	text('South Asia',200,30);
+	text('South Asia',200,33);
 	fill("#0082C8");
-	text('Europe and Central Asia',280,30);
+	text('Europe and Central Asia',280,33);
 	fill("#F582B4");
-	text('Latin America and Caribbean',430,30);
+	text('Latin America and Caribbean',430,33);
 	fill("#911EB4");
-	text('Middle East and North Africa',600,30);
+	text('Middle East and North Africa',600,33);
 	fill("#46F0F0");
-	text('Other',780,30);
+	text('Other',780,33);
 
 	var margin = 40;
 	translate(20, 90);
@@ -117,15 +121,4 @@ function draw() {
 
 function organizeData() {
   thisYear = data[currentyear];
- //  Object.keys(thisYear).forEach(function(key) {
-	// total = thisYear[key]['total']
-	// if(total > maxTotal)
-	//   maxTotal = total;
-	// if (!minTotal) {
-	// 	minTotal = total;
-	// } 
-	// else if (total < minTotal) {
-	// 	minTotal = total;
-	// }
- //  });
 }
