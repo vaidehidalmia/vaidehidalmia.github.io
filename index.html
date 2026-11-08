@@ -1,4 +1,147 @@
----
-layout: home
-# Index page
----
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Vaidehi Dalmia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+  /* Layout: single column. Header = bio left, photo right. Research and Education are thumbnail-left rows. */
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1f2320;
+    --muted: #5e655f;
+    --rule: #d9d7cf;
+    --accent: #2e5c4e;
+    --accent-soft: #e4ece7;
+    --thumb: #ecebe5;
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161a18; --fg: #e8e6df; --muted: #a3a99f; --rule: #2f3632;
+      --accent: #8fc4ad; --accent-soft: #1f2d27; --thumb: #222825; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161a18; --fg: #e8e6df; --muted: #a3a99f; --rule: #2f3632;
+    --accent: #8fc4ad; --accent-soft: #1f2d27; --thumb: #222825; color-scheme: dark;
+  }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: var(--body); font-size: 17px; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 3rem 5rem;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; min-width: 0; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  p { margin: 0 0 1rem; }
+  h1 { font-family: var(--display); font-weight: 600; font-size: clamp(2.6rem, 6vw, 3.4rem); line-height: 1.05; margin: 0 0 1.2rem; letter-spacing: -0.015em; text-wrap: balance; }
+  h2 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; margin: 3rem 0 1.2rem; padding-bottom: .4rem; border-bottom: 1px solid var(--rule); text-wrap: balance; }
+
+  /* Header */
+  .hero { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; }
+  .hero .bio { flex: 1 1 380px; min-width: 0; max-width: 60ch; }
+  .hero .photo { flex: 0 0 240px; }
+  .photo-box { width: 240px; max-width: 100%; aspect-ratio: 1; border-radius: 4px; background: var(--thumb); border: 1px solid var(--rule); overflow: hidden; padding: 0;
+    display: grid; place-items: center; font-family: var(--mono); font-size: .72rem; color: var(--muted); text-align: center; padding: 1rem; box-sizing: border-box; }
+  .photo-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+  .links { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: .4rem 0 0; list-style: none; }
+  .links a { display: inline-block; font-family: var(--mono); font-size: .8rem; text-decoration: none; color: var(--fg);
+    border: 1px solid var(--rule); padding: .3rem .75rem; border-radius: 999px; background: var(--accent-soft); }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Research rows */
+  .row { display: grid; grid-template-columns: 1fr; gap: 1rem 1.6rem; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); align-items: start; }
+  .row:last-child { border-bottom: 0; }
+  @media (min-width: 640px) { .row { grid-template-columns: 260px 1fr; } .thumb { max-width: 260px; } }
+  .row .text { min-width: 0; }
+  .thumb { width: 100%; max-width: 220px; aspect-ratio: 970 / 565; border-radius: 4px; background: var(--thumb); border: 1px solid var(--rule); overflow: hidden;
+    display: grid; place-items: center; font-family: var(--mono); font-size: .72rem; color: var(--muted); text-align: center; padding: 1rem; box-sizing: border-box; }
+  .thumb { padding: 0; }
+  .thumb img, .thumb video { width: 100%; height: 100%; object-fit: contain; }
+  .row p { margin: 0 0 .3rem; }
+  .pub-title { font-weight: 500; font-size: 1.05rem; line-height: 1.35; }
+  .pub-authors { font-size: .95rem; }
+  .eq { color: var(--muted); font-size: .85rem; }
+  .pub-venue { font-style: italic; color: var(--muted); font-size: .95rem; }
+  .pub-links { font-family: var(--mono); font-size: .8rem; margin-bottom: .6rem !important; }
+  .pub-desc { color: var(--muted); font-size: .95rem; }
+  .tag { display: inline-block; font-family: var(--mono); font-size: .72rem; background: var(--accent-soft); padding: .15rem .5rem; border-radius: 3px; margin-left: .4rem; vertical-align: middle; }
+
+  /* Education rows */
+  .edu { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: center; padding: .9rem 0; border-bottom: 1px solid var(--rule); }
+  .edu:last-child { border-bottom: 0; }
+  .edu .text { min-width: 0; }
+  .logo { width: 64px; aspect-ratio: 1; border-radius: 4px; background: var(--thumb); border: 1px solid var(--rule); display: grid; place-items: center;
+    font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--muted); }
+  .logo { background: #ffffff; padding: 6px; box-sizing: border-box; }
+  .logo img { width: 100%; height: 100%; object-fit: contain; }
+  .edu .school { font-weight: 500; }
+  .edu .meta { color: var(--muted); font-size: .95rem; }
+  .edu p { margin: 0; }
+
+  footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .8rem; font-family: var(--mono); }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="bio">
+      <h1>Vaidehi Dalmia</h1>
+      <p>I am a master's student at the University of Southern California, where I do research in the <strong>SLURM Lab</strong>, advised by <a href="https://danielseita.github.io/">Dr. Daniel Seita</a>. I work on robot manipulation with foundation models, and I am especially interested in training policies that stay robust in cluttered, real-world environments. Before USC, I studied at Columbia University.</p>
+      <p>I like building the whole stack: environments, data pipelines, training, and evaluation on real robots and in simulation.</p>
+      <ul class="links">
+        <li><a href="#contact">Email</a></li>
+        <li><a href="https://github.com/vaidehidalmia">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/vaidehidalmia/">LinkedIn</a></li>
+        <li><a href="https://vaidehidalmia.substack.com/">Substack</a></li>
+      </ul>
+    </div>
+    <div class="photo">
+      <div class="photo-box"><img src="assets/photo.jpg" alt="Vaidehi Dalmia"></div>
+    </div>
+  </header>
+
+  <h2>Research</h2>
+  <div class="row">
+    <div class="thumb"><img src="assets/clutterbench.jpg" alt="ClutterBench overview: simulated and real-world cluttered scenes with a robot arm"></div>
+    <div class="text">
+      <p class="pub-title"><a href="https://clutterbench.github.io/">ClutterBench: A Benchmark for Evaluating Vision-Language-Action Models in Cluttered Environments</a></p>
+      <p class="pub-authors">Yuxuan Li*, Juneyoung Yoon*, <strong>Vaidehi Dalmia*</strong>, Yiyang Ling, Ue-Hwan Kim, Daniel Seita <span class="eq">(* equal contribution)</span></p>
+      <p class="pub-venue">NeurIPS 2026 Workshop on Vision Language Models: Challenges of Real-World Deployment (VLM4RWD)</p>
+      <p class="pub-links"><a href="https://clutterbench.github.io/">project page</a> · <a href="https://openreview.net/forum?id=fdKN2WvSAI">openreview</a></p>
+      <p class="pub-desc">A benchmark for testing VLA policies on manipulation in cluttered scenes, spanning four kinds of clutter, evaluated across seven models in simulation and three on a real robot. Beyond success rate, it measures how much the policy disturbs objects it was not asked to move.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="thumb">in progress</div>
+    <div class="text">
+      <p class="pub-title">Ongoing work on VLA policies for manipulation <span class="tag">in progress</span></p>
+      <p class="pub-desc">A follow-up to ClutterBench that looks at physical clutter: scenes where the environment itself gets in the way of the arm, not just the objects on the table. Details to come once the work is ready to share.</p>
+    </div>
+  </div>
+
+  <h2>Education</h2>
+  <div class="edu">
+    <div class="logo"><img src="assets/usc.png" alt="USC"></div>
+    <div class="text">
+      <p class="school">University of Southern California</p>
+      <p class="meta">M.S.</p>
+    </div>
+  </div>
+  <div class="edu">
+    <div class="logo"><img src="assets/columbia.png" alt="Columbia University"></div>
+    <div class="text">
+      <p class="school">Columbia University</p>
+      <p class="meta">B.S.</p>
+    </div>
+  </div>
+
+  <h2 id="contact">Contact</h2>
+  <p>The best way to reach me is by email: <span style="font-family: var(--mono)">vaidehidalmia@gmail.com</span>. I am always happy to talk about robot learning, manipulation, or the lab.</p>
+
+  <footer>Last updated November 2026</footer>
+</div>
+
+</body></html>
